@@ -8,11 +8,11 @@
         to="/"
       >
         <img v-if="logo" :src="logo" class="sidebar-logo" />
-        <h1 v-else class="sidebar-title">vue3-element-admin</h1>
+        <h1 v-else class="sidebar-title">铁路学会后台管理</h1>
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
         <img v-if="logo" :src="logo" class="sidebar-logo" />
-        <h1 class="sidebar-title">vue3-element-admin</h1>
+        <h1 class="sidebar-title">铁路学会后台管理</h1>
       </router-link>
     </transition>
   </div>

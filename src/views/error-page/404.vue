@@ -1,16 +1,5 @@
 <!-- setup 无法设置组件名称，组件名称keepAlive必须 -->
-<script lang="ts">
-export default {
-  name: 'Page404'
-};
-</script>
-
-<script setup lang="ts">
-function message() {
-  return 'The webmaster said that you can not enter this page...';
-}
-</script>
-
+<script lang="ts" setup></script>
 <template>
   <div class="wscn-http404-container">
     <div class="wscn-http404">
@@ -37,22 +26,10 @@ function message() {
         />
       </div>
       <div class="bullshit">
-        <div class="bullshit__oops">OOPS!</div>
-        <div class="bullshit__info">
-          All rights reserved
-          <a
-            style="color: #20a0ff"
-            href="https://wallstreetcn.com"
-            target="_blank"
-            >wallstreetcn</a
-          >
-        </div>
-        <div class="bullshit__headline">{{ message }}</div>
-        <div class="bullshit__info">
-          Please check that the URL you entered is correct, or click the button
-          below to return to the homepage.
-        </div>
-        <a href="" class="bullshit__return-home">Back to home</a>
+        <div class="bullshit__oops">哎呀！</div>
+        <div class="bullshit__headline">找不到页面</div>
+        <div class="bullshit__info">您可以点击</div>
+        <a href="" class="bullshit__return-home">回到首页</a>
       </div>
     </div>
   </div>

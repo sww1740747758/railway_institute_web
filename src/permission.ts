@@ -6,9 +6,16 @@ import 'nprogress/nprogress.css';
 NProgress.configure({ showSpinner: false }); // 进度环显示/隐藏
 
 // 白名单路由
-const whiteList = ['/login'];
+const whiteList = ['/textera', '/home', '/login'];
 
 router.beforeEach(async (to, from, next) => {
+  if (to.meta.title) {
+    //判断是否有标题
+    document.title = to.meta.title;
+  } else {
+    document.title = '铁路学会';
+  }
+
   NProgress.start();
   const { user, permission } = useStore();
   const hasToken = user.token;
@@ -19,6 +26,7 @@ router.beforeEach(async (to, from, next) => {
       NProgress.done();
     } else {
       const hasGetUserInfo = user.roles.length > 0;
+
       if (hasGetUserInfo) {
         if (to.matched.length === 0) {
           from.name ? next({ name: from.name as any }) : next('/401');
@@ -38,7 +46,7 @@ router.beforeEach(async (to, from, next) => {
           // 移除 token 并跳转登录页
           await user.resetToken();
           ElMessage.error((error as any) || 'Has Error');
-          next(`/login?redirect=${to.path}`);
+          next('/home');
           NProgress.done();
         }
       }
@@ -48,7 +56,7 @@ router.beforeEach(async (to, from, next) => {
     if (whiteList.indexOf(to.path) !== -1) {
       next();
     } else {
-      next(`/login?redirect=${to.path}`);
+      next('/home');
       NProgress.done();
     }
   }

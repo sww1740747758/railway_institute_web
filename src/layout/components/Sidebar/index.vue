@@ -31,8 +31,8 @@ import { useRoute } from 'vue-router';
 import SidebarItem from './SidebarItem.vue';
 import Logo from './Logo.vue';
 import variables from '@/styles/variables.module.scss';
-import useStore from '@/store';
 
+import useStore from '@/store';
 const { permission, setting, app } = useStore();
 
 const route = useRoute();

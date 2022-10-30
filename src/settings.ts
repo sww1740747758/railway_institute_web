@@ -8,7 +8,7 @@ interface DefaultSettings {
 }
 
 const defaultSettings: DefaultSettings = {
-  title: 'vue3-element-admin',
+  title: '铁路学会后台管理',
   showSettings: true,
   tagsView: true,
   fixedHeader: false,

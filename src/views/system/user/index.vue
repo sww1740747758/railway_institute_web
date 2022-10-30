@@ -254,6 +254,7 @@ function resetPassword(row: { [key: string]: any }) {
  * 添加用户
  **/
 async function handleAdd() {
+  formData.value.id = undefined;
   state.dialog = {
     title: '添加用户',
     visible: true
@@ -412,7 +413,11 @@ function submitImportForm() {
       const deptId = state.importFormData.deptId;
       const roleIds = state.importFormData.roleIds.join(',');
       importUser(deptId, roleIds, state.excelFile).then(response => {
-        ElMessage.success(response.data);
+        ElMessage({
+          dangerouslyUseHTMLString: true,
+          message: response.data,
+          type: 'success'
+        });
         closeImportDialog();
         handleQuery();
       });

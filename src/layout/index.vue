@@ -4,11 +4,11 @@
       v-if="device === 'mobile' && sidebar.opened"
       class="drawer-bg"
       @click="handleClickOutside"
-    />
+    ></div>
     <Sidebar class="sidebar-container" />
     <div :class="{ hasTagsView: needTagsView }" class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
-        <navbar />
+        <navbar>{{ username }}</navbar>
         <tags-view v-if="needTagsView" />
       </div>
 
@@ -16,9 +16,9 @@
       <app-main />
 
       <!-- 设置面板 -->
-      <RightPanel v-if="showSettings">
+      <!-- <RightPanel v-if="showSettings">
         <settings />
-      </RightPanel>
+      </RightPanel> -->
     </div>
   </div>
 </template>
@@ -35,8 +35,9 @@ import useStore from '@/store';
 const { width } = useWindowSize();
 const WIDTH = 992;
 
-const { app, setting } = useStore();
+const { user, app, setting } = useStore();
 
+const username = computed(() => user.username);
 const sidebar = computed(() => app.sidebar);
 const device = computed(() => app.device);
 const needTagsView = computed(() => setting.tagsView);

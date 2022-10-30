@@ -13,6 +13,7 @@ const useUserStore = defineStore({
   state: (): UserState => ({
     token: localStorage.get('token') || '',
     nickname: '',
+    username: localStorage.get('username') || '',
     avatar: '',
     roles: [],
     perms: []
@@ -36,6 +37,7 @@ const useUserStore = defineStore({
             console.log('response.data', response.data);
             const accessToken = response.data;
             localStorage.set('token', accessToken);
+            localStorage.set('username', username);
             this.token = accessToken;
             resolve(accessToken);
           })
@@ -79,6 +81,7 @@ const useUserStore = defineStore({
         logout()
           .then(() => {
             localStorage.remove('token');
+            localStorage.remove('username');
             this.RESET_STATE();
             resetRouter();
             resolve(null);
@@ -95,11 +98,12 @@ const useUserStore = defineStore({
     resetToken() {
       return new Promise(resolve => {
         localStorage.remove('token');
+        localStorage.remove('username');
         this.RESET_STATE();
         resolve(null);
       });
     }
-  }
+  } // 开启数据缓存
 });
 
 export default useUserStore;

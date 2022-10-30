@@ -1,0 +1,161 @@
+.border-style {
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  margin: 30px 0;
+  padding: 0 50px;
+}
+.article-title {
+  text-align: center;
+  font-size: 24px;
+  color: #252525;
+  margin: 30px 0 21px;
+}
+.line-style {
+  background: #d0d0d0;
+  width: 100%;
+  height: 2px;
+}
+
+.size-set {
+  overflow: hidden;
+  width: 200px;
+  margin: 18px 0 8px 856px;
+}
+.size-set li {
+  padding-right: 5px;
+  float: left;
+}
+.border-style .size-set {
+  margin: 18px auto 8px;
+}
+.mr10 {
+  margin-right: 10px;
+}
+.mt30 {
+  margin-top: 30px;
+}
+.mb30 {
+  margin-bottom: 30px;
+}
+.size-set li a {
+  text-decoration: none;
+  color: #666;
+}
+.author-set {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+.red {
+  color: #ff1100 !important;
+}
+/*åˆ—è¡¨æ ·å¼*/
+.father-page-box {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.page-box {
+  text-align: center;
+}
+.pagination > li > a,
+.pagination > li > span {
+  width: 32px;
+  margin: 5px;
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+  padding: 0;
+  line-height: 32px;
+  font-size: 14px;
+  color: #5e5e5e;
+}
+.pagination > li > a:hover,
+.pagination > li > span:hover,
+.pagination > li > a:active,
+.pagination > li > span:active,
+.pagination > li > a:visited,
+.pagination > li > span:visited,
+.pagination > li > a:focus,
+.pagination > li > span:focus,
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  color: #fff;
+  background: #0052d9;
+  border: 1px solid #0052d9;
+}
+.no-border {
+  border: none !important;
+}
+.fz20 {
+  font-size: 20px !important;
+}
+.list-a-style {
+  float: left;
+  width: 690px;
+  cursor: pointer;
+  color: #666;
+  text-decoration: none !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.list-a-style:hover {
+  color: #666 !important;
+}
+/*ä¸ªäººä¸­å¿ƒ*/
+.personal-img {
+  line-height: 32px;
+}
+.personal-img img {
+  width: 25px;
+  height: 29px;
+  margin-right: 15px;
+}
+.personal-inform {
+  padding: 40px 0 30px 130px;
+}
+.personal-inform input[type='text'],
+.personal-inform input[type='password'] {
+  width: 270px;
+}
+.personal-inform .pl90 {
+  padding-left: 263px;
+}
+.bold-style {
+  font-weight: 600;
+}
+#viewNotifications p {
+  color: #666;
+  line-height: 24px;
+}
+.form-group input.w330 {
+  width: 330px;
+}
+.w620 {
+  width: 620px;
+  border-radius: 4px;
+}
+.pr240 {
+  text-align: right;
+  padding-right: 240px;
+}
+.up-file {
+  margin-left: -84px;
+  margin-top: 4px;
+  width: 76px;
+  height: 25px;
+  cursor: pointer;
+  opacity: 0;
+}
+.up-p {
+  line-height: 32px;
+  margin-left: 20px;
+}
+.file-name {
+  margin-left: -2px;
+  width: 250px !important;
+}

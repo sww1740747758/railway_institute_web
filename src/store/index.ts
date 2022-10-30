@@ -3,13 +3,14 @@ import useAppStore from './modules/app';
 import usePermissionStore from './modules/permission';
 import useSettingStore from './modules/settings';
 import useTagsViewStore from './modules/tagsView';
-
+import homePageStore from './modules/homePageStore.d';
 const useStore = () => ({
-  user: useUserStore(),
   app: useAppStore(),
+  user: useUserStore(),
   permission: usePermissionStore(),
   setting: useSettingStore(),
-  tagsView: useTagsViewStore()
+  tagsView: useTagsViewStore(),
+  homePageStore: homePageStore()
 });
 
 export default useStore;

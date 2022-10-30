@@ -3,24 +3,18 @@ export default { name: 'Dashboard' };
 </script>
 
 <script setup lang="ts">
-// 组件引用
-//右上角gitHub链接
-// import GithubCorner from '@/components/GithubCorner/index.vue';
-import SvgIcon from '@/components/SvgIcon/index.vue';
-import BarChart from './components/Chart/BarChart.vue';
-import PieChart from './components/Chart/PieChart.vue';
-import RadarChart from './components/Chart/RadarChart.vue';
+// import SvgIcon from '@/components/SvgIcon/index.vue';
+// import BarChart from './components/Chart/BarChart.vue';
+// import PieChart from './components/Chart/PieChart.vue';
+// import RadarChart from './components/Chart/RadarChart.vue';
 
-import Project from './components/Project/index.vue';
-import Team from './components/Team/index.vue';
+// import Project from './components/Project/index.vue';
+// import Team from './components/Team/index.vue';
 </script>
 
 <template>
   <div class="dashboard-container">
-    <!-- <github-corner class="github-corner" /> -->
-
-    <!-- 数据 -->
-    <el-row :gutter="40" class="card-panel__col">
+    <!-- <el-row :gutter="40" class="card-panel__col">
       <el-col :xs="24" :sm="12" :lg="6" class="card-panel__col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper icon-user">
@@ -69,20 +63,16 @@ import Team from './components/Team/index.vue';
       </el-col>
     </el-row>
 
-    <!-- 项目 + 团队成员介绍 -->
     <el-row :gutter="40">
-      <!-- 项目介绍 -->
       <el-col :md="12" :lg="12" class="card-panel__col">
         <Project />
       </el-col>
 
-      <!-- 团队介绍 -->
       <el-col :md="12" :lg="12" class="card-panel__col">
         <Team />
       </el-col>
     </el-row>
 
-    <!-- Echarts 图表 -->
     <el-row :gutter="40" style="margin-top: 20px">
       <el-col :sm="24" :lg="8" class="card-panel__col">
         <BarChart
@@ -110,7 +100,7 @@ import Team from './components/Team/index.vue';
           class="chart-container"
         />
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
 </template>
 

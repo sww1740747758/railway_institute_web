@@ -30,7 +30,7 @@
 
       <el-tooltip
         :disabled="capslockTooltipDisabled"
-        content="Caps lock is On"
+        content="大写锁定打开"
         placement="right"
       >
         <el-form-item prop="password">
@@ -42,7 +42,7 @@
             :key="passwordType"
             v-model="loginForm.password"
             :type="passwordType"
-            placeholder="Password"
+            :placeholder="$t('login.password')"
             name="password"
             tabindex="2"
             auto-complete="on"
@@ -68,14 +68,14 @@
       </el-button>
 
       <!-- 账号密码提示 -->
-      <div class="tips">
+      <!-- <div class="tips">
         <div style="position: relative">
           <span style="margin-right: 20px"
             >{{ $t('login.username') }}: admin</span
           >
           <span> {{ $t('login.password') }}: 123456</span>
         </div>
-      </div>
+      </div> -->
     </el-form>
 
     <div v-if="showCopyright == true" class="copyright">
@@ -110,11 +110,13 @@ const passwordRef = ref(ElInput);
 const state = reactive({
   redirect: '',
   loginForm: {
-    username: 'admin',
-    password: '123456'
+    username: '',
+    password: ''
   } as LoginFormData,
   loginRules: {
-    username: [{ required: true, trigger: 'blur' }],
+    username: [
+      { required: true, trigger: 'blur', validator: validateUserName }
+    ],
     password: [{ required: true, trigger: 'blur', validator: validatePassword }]
   },
   loading: false,
@@ -129,7 +131,14 @@ const state = reactive({
 
 function validatePassword(rule: any, value: any, callback: any) {
   if (value.length < 6) {
-    callback(new Error('The password can not be less than 6 digits'));
+    callback(new Error('密码不能小于6位'));
+  } else {
+    callback();
+  }
+}
+function validateUserName(rule: any, value: any, callback: any) {
+  if (value.length == 0) {
+    callback(new Error('用户名不能为空'));
   } else {
     callback();
   }

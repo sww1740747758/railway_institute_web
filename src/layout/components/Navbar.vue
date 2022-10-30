@@ -17,7 +17,6 @@
         <el-tooltip content="布局大小" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
-        <lang-select class="right-menu-item hover-effect" />
       </template>
 
       <el-dropdown
@@ -25,24 +24,16 @@
         trigger="click"
       >
         <div class="avatar-wrapper">
+          <slot></slot>
           <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" />
           <CaretBottom style="width: 0.6em; height: 0.6em; margin-left: 5px" />
         </div>
 
         <template #dropdown>
           <el-dropdown-menu>
-            <router-link to="/">
+            <router-link to="/home">
               <el-dropdown-item>{{ $t('navbar.dashboard') }}</el-dropdown-item>
             </router-link>
-            <a target="_blank" href="https://github.com/hxrui">
-              <el-dropdown-item>Github</el-dropdown-item>
-            </a>
-            <a target="_blank" href="https://gitee.com/haoxr">
-              <el-dropdown-item>{{ $t('navbar.gitee') }}</el-dropdown-item>
-            </a>
-            <a target="_blank" href="https://www.cnblogs.com/haoxianrui/">
-              <el-dropdown-item>{{ $t('navbar.document') }}</el-dropdown-item>
-            </a>
             <el-dropdown-item divided @click="logout">
               {{ $t('navbar.logout') }}
             </el-dropdown-item>

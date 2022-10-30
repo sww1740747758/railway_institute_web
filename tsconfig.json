@@ -16,7 +16,14 @@
     },
     "allowSyntheticDefaultImports": true, // 默认导入
     "skipLibCheck": true, // 不对第三方依赖类型检查 ，element-plus 生产打包报错
-    "types": ["element-plus/global"]
+    "types": ["element-plus/global"],
+    "allowJs": true //允许有js
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/**/*.js"
+  ]
 }

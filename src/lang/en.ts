@@ -6,13 +6,13 @@ export default {
   },
   // 登录页面国际化
   login: {
-    title: 'vue3-element-admin',
+    title: 'railway_institute_web',
     username: 'Username',
     password: 'Password',
     login: 'Login',
     code: 'Verification Code',
-    copyright: '',
-    icp: '',
+    copyright: '111',
+    icp: '11',
     thirdPartyLogin: 'third-party login'
   },
   // 导航栏国际化

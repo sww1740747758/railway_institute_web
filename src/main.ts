@@ -1,9 +1,10 @@
 import { createApp, Directive } from 'vue';
 import App from './App.vue';
 import router from '@/router';
-
+import './assets/css/style.css';
+import './assets/css/hover.css';
 import { createPinia } from 'pinia';
-
+import piniaPluginPersist from 'pinia-plugin-persist';
 import ElementPlus from 'element-plus';
 import 'element-plus/theme-chalk/index.css';
 import Pagination from '@/components/Pagination/index.vue';
@@ -38,7 +39,7 @@ app.config.globalProperties.$listDictItemsByTypeCode = listDictItemsByTypeCode;
 // 注册全局组件
 app
   .component('Pagination', Pagination)
-  .use(createPinia())
+  .use(createPinia().use(piniaPluginPersist))
   .use(router)
   .use(ElementPlus)
   .use(i18n)

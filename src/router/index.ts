@@ -1,11 +1,36 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import useStore from '@/store';
 
 export const Layout = () => import('@/layout/index.vue');
-
+const pageHome = () => import('../views/homePage.vue');
+const home = () => import('../views/home.vue');
+const textera = () => import('../views/textera.vue');
 // 参数说明: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
 // 静态路由
 export const constantRoutes: Array<RouteRecordRaw> = [
+  {
+    path: '/pageHome',
+    name: 'pageHome',
+    component: pageHome,
+    props: true,
+    meta: {
+      hidden: true
+    },
+    children: [
+      {
+        name: 'home',
+        path: '/home',
+        component: home,
+        props: true
+      },
+      {
+        name: 'textera',
+        path: '/textera',
+        component: textera,
+        props: true
+      }
+    ]
+  },
   {
     path: '/redirect',
     component: Layout,
@@ -17,6 +42,7 @@ export const constantRoutes: Array<RouteRecordRaw> = [
       }
     ]
   },
+
   {
     path: '/login',
     component: () => import('@/views/login/index.vue'),
@@ -27,7 +53,6 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     component: () => import('@/views/error-page/404.vue'),
     meta: { hidden: true }
   },
-
   {
     path: '/',
     component: Layout,
@@ -43,66 +68,19 @@ export const constantRoutes: Array<RouteRecordRaw> = [
         path: '401',
         component: () => import('@/views/error-page/401.vue'),
         meta: { hidden: true }
-      },
+      }
     ]
+  },
+  {
+    path: '/:path(.*)',
+    component: () => import('@/views/error-page/404.vue'),
+    meta: { hidden: true }
   }
-
-  // 外部链接
-  /*{
-        path: '/external-link',
-        component: Layout,
-        children: [
-            {
-                path: 'https://www.cnblogs.com/haoxianrui/',
-                meta: { title: '外部链接', icon: 'link' }
-            }
-        ]
-    }*/
-  // 多级嵌套路由
-  /* {
-         path: '/nested',
-         component: Layout,
-         redirect: '/nested/level1/level2',
-         name: 'Nested',
-         meta: {title: '多级菜单', icon: 'nested'},
-         children: [
-             {
-                 path: 'level1',
-                 component: () => import('@/views/nested/level1/index.vue'),
-                 name: 'Level1',
-                 meta: {title: '菜单一级'},
-                 redirect: '/nested/level1/level2',
-                 children: [
-                     {
-                         path: 'level2',
-                         component: () => import('@/views/nested/level1/level2/index.vue'),
-                         name: 'Level2',
-                         meta: {title: '菜单二级'},
-                         redirect: '/nested/level1/level2/level3',
-                         children: [
-                             {
-                                 path: 'level3-1',
-                                 component: () => import('@/views/nested/level1/level2/level3/index1.vue'),
-                                 name: 'Level3-1',
-                                 meta: {title: '菜单三级-1'}
-                             },
-                             {
-                                 path: 'level3-2',
-                                 component: () => import('@/views/nested/level1/level2/level3/index2.vue'),
-                                 name: 'Level3-2',
-                                 meta: {title: '菜单三级-2'}
-                             }
-                         ]
-                     }
-                 ]
-             },
-         ]
-     }*/
 ];
 
 // 创建路由
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: constantRoutes as RouteRecordRaw[],
   // 刷新时，滚动条位置还原
   scrollBehavior: () => ({ left: 0, top: 0 })

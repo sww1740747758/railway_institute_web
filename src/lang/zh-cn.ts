@@ -6,13 +6,13 @@ export default {
   },
   // 登录页面国际化
   login: {
-    title: 'vue3-element-admin',
+    title: '铁路学会后台管理系统',
     username: '用户名',
     password: '密码',
     login: '登 录',
     code: '请输入验证码',
-    copyright: '',
-    icp: '',
+    copyright: '111',
+    icp: '111',
     thirdPartyLogin: '第三方登录'
   },
   navbar: {
