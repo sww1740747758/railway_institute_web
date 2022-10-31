@@ -1,11 +1,7 @@
 <template>
   <div class="navbar">
-    <hamburger
-      id="hamburger-container"
-      :is-active="sidebar.opened"
-      class="hamburger-container"
-      @toggleClick="toggleSideBar"
-    />
+    <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container"
+      @toggleClick="toggleSideBar" />
 
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
 
@@ -13,16 +9,15 @@
       <template v-if="device !== 'mobile'">
         <!--        <search id="header-search" class="right-menu-item" />
                 <error-log class="errLog-container right-menu-item hover-effect" />-->
-        <screenfull id="screenfull" class="right-menu-item hover-effect" />
+        <el-tooltip content="全屏" effect="dark" placement="bottom">
+          <screenfull id="screenfull" class="right-menu-item hover-effect" />
+        </el-tooltip>
         <el-tooltip content="布局大小" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
       </template>
 
-      <el-dropdown
-        class="avatar-container right-menu-item hover-effect"
-        trigger="click"
-      >
+      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
           <slot></slot>
           <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" />
@@ -31,9 +26,10 @@
 
         <template #dropdown>
           <el-dropdown-menu>
-            <router-link to="/home">
-              <el-dropdown-item>{{ $t('navbar.dashboard') }}</el-dropdown-item>
-            </router-link>
+            <!-- <router-link to="/home"> -->
+            <!-- <router-link to="/home"> -->
+            <el-dropdown-item @click="goHome">{{ $t('navbar.dashboard') }}</el-dropdown-item>
+            <!-- </router-link> -->
             <el-dropdown-item divided @click="logout">
               {{ $t('navbar.logout') }}
             </el-dropdown-item>
@@ -73,6 +69,11 @@ function toggleSideBar() {
   app.toggleSidebar();
 }
 
+
+function goHome() {
+  router.push("/home");
+}
+
 function logout() {
   ElMessageBox.confirm('确定注销并退出系统吗？', '提示', {
     confirmButtonText: '确定',
@@ -97,6 +98,7 @@ ul {
   margin: 0;
   padding: 0;
 }
+
 .navbar {
   height: 50px;
   overflow: hidden;

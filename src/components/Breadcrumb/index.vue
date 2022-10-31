@@ -2,13 +2,9 @@
   <el-breadcrumb class="app-breadcrumb" separator-class="el-icon-arrow-right">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="item.path">
-        <span
-          v-if="
-            item.redirect === 'noredirect' || index === breadcrumbs.length - 1
-          "
-          class="no-redirect"
-          >{{ generateTitle(item.meta.title) }}</span
-        >
+        <span v-if="
+          item.redirect === 'noredirect' || index === breadcrumbs.length - 1
+        " class="no-redirect">{{ generateTitle(item.meta.title) }}</span>
         <a v-else @click.prevent="handleLink(item)">
           {{ generateTitle(item.meta.title) }}
         </a>

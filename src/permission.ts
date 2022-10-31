@@ -11,7 +11,7 @@ const whiteList = ['/textera', '/home', '/login'];
 router.beforeEach(async (to, from, next) => {
   if (to.meta.title) {
     //判断是否有标题
-    document.title = to.meta.title;
+    document.title = ""+to.meta.title;
   } else {
     document.title = '铁路学会';
   }
