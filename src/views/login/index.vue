@@ -66,7 +66,9 @@
         @click.prevent="handleLogin"
         >{{ $t('login.login') }}
       </el-button>
-
+      <router-link to="/home">
+        <p class="bullshit__return-home">回到首页</p>
+      </router-link>
       <!-- 账号密码提示 -->
       <!-- <div class="tips">
         <div style="position: relative">
@@ -180,7 +182,7 @@ function handleLogin() {
       user
         .login(state.loginForm)
         .then(() => {
-          router.push({ path: state.redirect || '/', query: state.otherQuery });
+          router.push('/home');
           state.loading = false;
         })
         .catch(() => {

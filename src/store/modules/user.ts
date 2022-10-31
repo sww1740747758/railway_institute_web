@@ -34,11 +34,11 @@ const useUserStore = defineStore({
           password: password
         })
           .then(response => {
-            console.log('response.data', response.data);
             const accessToken = response.data;
             localStorage.set('token', accessToken);
             localStorage.set('username', username);
             this.token = accessToken;
+            this.username = username;
             resolve(accessToken);
           })
           .catch(error => {

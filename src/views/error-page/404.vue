@@ -29,7 +29,9 @@
         <div class="bullshit__oops">哎呀！</div>
         <div class="bullshit__headline">找不到页面</div>
         <div class="bullshit__info">您可以点击</div>
-        <a href="" class="bullshit__return-home">回到首页</a>
+        <router-link to="/home">
+          <p class="bullshit__return-home">回到首页</p>
+        </router-link>
       </div>
     </div>
   </div>

@@ -2,32 +2,29 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import useStore from '@/store';
 
 export const Layout = () => import('@/layout/index.vue');
-const pageHome = () => import('../views/homePage.vue');
-const home = () => import('../views/home.vue');
-const textera = () => import('../views/textera.vue');
 // 参数说明: https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
 // 静态路由
 export const constantRoutes: Array<RouteRecordRaw> = [
   {
     path: '/pageHome',
-    name: 'pageHome',
-    component: pageHome,
-    props: true,
+    component: () => import('../views/homePage.vue'),
     meta: {
       hidden: true
     },
     children: [
       {
-        name: 'home',
         path: '/home',
-        component: home,
-        props: true
+        component: () => import('../views/home.vue'),
+        meta: {
+          hidden: true
+        }
       },
       {
-        name: 'textera',
         path: '/textera',
-        component: textera,
-        props: true
+        component: () => import('../views/textera.vue'),
+        meta: {
+          hidden: true
+        }
       }
     ]
   },

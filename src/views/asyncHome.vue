@@ -41,7 +41,7 @@ const silderObj = reactive([
 <template>
   <titleSlot>
     <template #title>
-      <span>会议列表</span>
+      <span>学术交流&科学普及</span>
     </template>
     <template #default>
       <el-row>

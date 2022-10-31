@@ -6,6 +6,7 @@ import titleSlot from '../components/Title.vue';
 import asyncCom from './asyncHome.vue';
 const huiYuan = defineAsyncComponent(() => import('./huiyuan.vue'));
 const huiYuan2 = defineAsyncComponent(() => import('./huiyuan2.vue'));
+const member = defineAsyncComponent(() => import('./member.vue'));
 const silderObj = reactive([
   {
     silder: silder,
@@ -63,13 +64,11 @@ const { stop } = useIntersectionObserver(
   <el-container>
     <el-main>
       <el-header>
-        <div class="block text-center">
-          <el-carousel height="450px">
-            <el-carousel-item v-for="item in silderObj" :key="item.id">
-              <el-image :src="item.silder" />
-            </el-carousel-item>
-          </el-carousel>
-        </div>
+        <el-carousel height="450px">
+          <el-carousel-item v-for="item in silderObj" :key="item.id">
+            <el-image :src="item.silder" />
+          </el-carousel-item>
+        </el-carousel>
       </el-header>
       <el-header style="margin-top: 10%">
         <asyncCom />
@@ -82,102 +81,75 @@ const { stop } = useIntersectionObserver(
             <span>{{ item }}</span>
           </template>
           <template #default>
-            <div class="pull-left quick-info">
-              <ul class="com-ul-list clearfloat" id="str0Box">
-                <li class="top-container">
-                  <i></i
-                  ><a
-                    onclick="goPage(44,2181)"
-                    href="javascript:;"
-                    title="中国地方铁路改革发展这十年"
-                    >中国地方铁路改革发展这十年</a
-                  ><span class="top top-right">置顶</span>
-                </li>
-                <li class="top-container" style="margin-left: 45px">
-                  <i></i
-                  ><a
-                    onclick="goPage(20,2161)"
-                    href="javascript:;"
-                    title="黄民会长会见国投集团钟国东副总裁一行"
-                    >黄民会长会见国投集团钟国东副总裁一行</a
-                  ><span class="top top-right">置顶</span>
-                </li>
-                <li class="top-container">
-                  <i></i
-                  ><a
-                    onclick="goPage(15,3)"
-                    href="javascript:;"
-                    title="协会章程"
-                    >协会章程</a
-                  >
-                </li>
-                <li class="top-container" style="margin-left: 45px">
-                  <i></i
-                  ><a
-                    onclick="goPage(31,2201)"
-                    href="javascript:;"
-                    title="《今日铁路》2022年第9期"
-                    >《今日铁路》2022年第9期</a
-                  >
-                </li>
-                <li class="top-container">
-                  <i></i
-                  ><a
-                    onclick="goPage(15,3)"
-                    href="javascript:;"
-                    title="协会章程"
-                    >协会章程</a
-                  >
-                </li>
-                <li class="top-container" style="margin-left: 45px">
-                  <i></i
-                  ><a
-                    onclick="goPage(31,2201)"
-                    href="javascript:;"
-                    title="《今日铁路》2022年第9期"
-                    >《今日铁路》2022年第9期</a
-                  >
-                </li>
-              </ul>
-            </div>
+            <ul style="margin-top: -12px">
+              <li
+                style="line-height: 44px; color: #333333"
+                v-for="item in 4"
+                :key="item"
+              >
+                <a style="color: inherit"
+                  >丁薛祥参加中央国家机关代表团讨论的撒大大萨达萨达萨达萨达</a
+                >
+                <span :class="{ top: true }">置顶</span>
+              </li>
+            </ul>
           </template>
         </titleSlot>
       </el-header>
     </el-main>
   </el-container>
 
-  <el-container>
-    <el-main>
-      <Suspense>
-        <template v-slot:default>
-          <div ref="target" class="common-layout">
-            <el-container>
-              <el-aside width="60%">
-                <huiYuan v-if="targetIsVisible" />
-              </el-aside>
-              <el-main>
-                <huiYuan2 v-if="targetIsVisible" />
-              </el-main>
-            </el-container>
-          </div>
-        </template>
-        <template v-slot:fallback>
-          <h3>加载中.....</h3>
-        </template>
-      </Suspense>
-    </el-main>
-  </el-container>
+  <Suspense>
+    <template v-slot:default>
+      <div ref="target" class="common-layout">
+        <el-container>
+          <el-aside width="60%">
+            <huiYuan v-if="targetIsVisible" />
+          </el-aside>
+          <el-main>
+            <huiYuan2 v-if="targetIsVisible" />
+          </el-main>
+        </el-container>
+      </div>
+    </template>
+    <template v-slot:fallback>
+      <h3>加载中.....</h3>
+    </template>
+  </Suspense>
+  <Suspense>
+    <template v-slot:default>
+      <member />
+    </template>
+    <template v-slot:fallback>
+      <h3>加载中.....</h3>
+    </template>
+  </Suspense>
 </template>
 
 <style scoped>
-@import '../assets/css/centerStyle.css';
-@import '../assets/css/common.css';
-
 .el-header,
 .el-main,
 .el-footer {
   width: 100%;
   height: auto;
+}
+
+.el-container {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.top {
+  margin-left: 10%;
+  display: inline-block;
+  width: 36px;
+  height: 24px;
+  color: #ffffff !important;
+  font-size: 12px !important;
+  font-weight: bolder;
+  line-height: 24px;
+  text-align: center;
+  background-color: #ff0000;
 }
 
 .image {

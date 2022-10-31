@@ -10,7 +10,7 @@ let disabled = ref(false);
       <el-header>
         <headder></headder>
       </el-header>
-      <el-main>
+      <el-main style="background-color: #eef2f5">
         <router-view></router-view>
       </el-main>
       <el-footer>
@@ -31,7 +31,7 @@ let disabled = ref(false);
 
 <style scoped>
 .el-header,
-.el-main,
+.el-mian,
 .el-footer {
   width: 100%;
   height: auto;

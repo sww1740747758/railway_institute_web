@@ -1,7 +1,11 @@
 <template>
   <div class="navbar">
-    <hamburger id="hamburger-container" :is-active="sidebar.opened" class="hamburger-container"
-      @toggleClick="toggleSideBar" />
+    <hamburger
+      id="hamburger-container"
+      :is-active="sidebar.opened"
+      class="hamburger-container"
+      @toggleClick="toggleSideBar"
+    />
 
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
 
@@ -17,7 +21,10 @@
         </el-tooltip>
       </template>
 
-      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+      <el-dropdown
+        class="avatar-container right-menu-item hover-effect"
+        trigger="click"
+      >
         <div class="avatar-wrapper">
           <slot></slot>
           <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" />
@@ -26,10 +33,9 @@
 
         <template #dropdown>
           <el-dropdown-menu>
-            <!-- <router-link to="/home"> -->
-            <!-- <router-link to="/home"> -->
-            <el-dropdown-item @click="goHome">{{ $t('navbar.dashboard') }}</el-dropdown-item>
-            <!-- </router-link> -->
+            <el-dropdown-item @click="goHome">{{
+              $t('navbar.dashboard')
+            }}</el-dropdown-item>
             <el-dropdown-item divided @click="logout">
               {{ $t('navbar.logout') }}
             </el-dropdown-item>
@@ -69,9 +75,8 @@ function toggleSideBar() {
   app.toggleSidebar();
 }
 
-
 function goHome() {
-  router.push("/home");
+  router.push('/home');
 }
 
 function logout() {
@@ -86,7 +91,7 @@ function logout() {
         tagsView.delAllViews();
       })
       .then(() => {
-        router.push(`/login?redirect=${route.fullPath}`);
+        router.push('/home');
       });
   });
 }

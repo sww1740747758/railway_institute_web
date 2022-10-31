@@ -33,3 +33,9 @@ img {
   background-size: cover;
   background-repeat: no-repeat center;
 }
+
+li {
+  list-style-type: none;
+}
+
+/** 首页 */
