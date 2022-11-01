@@ -76,21 +76,19 @@ const { stop } = useIntersectionObserver(
     </el-main>
     <el-main>
       <el-header>
-        <titleSlot v-for="item of titleList">
+        <titleSlot v-for="item of titleList" :key="item">
           <template #title>
             <span>{{ item }}</span>
           </template>
           <template #default>
             <ul style="margin-top: -12px">
-              <li
-                style="line-height: 44px; color: #333333"
-                v-for="item in 4"
-                :key="item"
-              >
-                <a style="color: inherit"
-                  >丁薛祥参加中央国家机关代表团讨论的撒大大萨达萨达萨达萨达</a
-                >
-                <span :class="{ top: true }">置顶</span>
+              <li style="line-height: 44px; color: #333333" v-for="item in 4" :key="item">
+                <a style="color: inherit">
+                  <p>
+                    <span :class="{ top: true }">置顶</span>
+                    丁薛祥参加中央国家机关代表团讨论的撒大大萨达萨达萨达萨达
+                  </p>
+                </a>
               </li>
             </ul>
           </template>
@@ -166,5 +164,16 @@ const { stop } = useIntersectionObserver(
   padding-right: 10px;
   padding-right: 0;
   padding-left: 0;
+}
+
+p {
+  width: 100%;
+  /*要显示文字的宽度*/
+  text-overflow: ellipsis;
+  /*让截断的文字显示为点点。还有一个值是clip意截断不显示点点*/
+  white-space: nowrap;
+  /*让文字不换行*/
+  overflow: hidden;
+  /*超出要隐藏*/
 }
 </style>

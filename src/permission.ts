@@ -6,8 +6,8 @@ import 'nprogress/nprogress.css';
 NProgress.configure({ showSpinner: false }); // 进度环显示/隐藏
 
 // 白名单路由
-const whiteList = ['/textera', '/home', '/login'];
-const loginWhiteList = ['/textera', '/home', '/pageHome'];
+const whiteList = ['/textera', '/home', '/login','/register'];
+const loginWhiteList = ['/textera', '/home'];
 
 router.beforeEach(async (to, from, next) => {
   if (to.meta.title) {
@@ -21,8 +21,6 @@ router.beforeEach(async (to, from, next) => {
   const { user, permission } = useStore();
   const hasToken = user.token;
   if (hasToken) {
-    console.log(11);
-
     if (loginWhiteList.indexOf(to.path) !== -1) {
       next();
     }
@@ -60,7 +58,6 @@ router.beforeEach(async (to, from, next) => {
   } else {
     // 未登录可以访问白名单页面(登录页面)
     if (whiteList.indexOf(to.path) !== -1) {
-      console.log(router.options.routes);
       next();
     } else {
       next('/home');

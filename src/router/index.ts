@@ -45,6 +45,12 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     component: () => import('@/views/login/index.vue'),
     meta: { hidden: true }
   },
+
+  {
+    path: '/register',
+    component: () => import('@/views/login/register.vue'),
+    meta: { hidden: true }
+  },
   {
     path: '/404',
     component: () => import('@/views/error-page/404.vue'),

@@ -35,7 +35,7 @@ const setSizeFn = (type, size) => {
   </div>
   <div class="wrapper">
     <ul class="menu-left" id="menuLeft">
-      <li v-for="(item, index) of titleObj.children" key="index" @click="secondMenuFn(titleObj.id, item.id)"
+      <li v-for="(item, index) of titleObj.children" :key="index" @click="secondMenuFn(titleObj.id, item.id)"
         :class="{ current: item.id == childrenObj.id }">
         <a href="javascript:;">{{ item.title }}</a>
       </li>

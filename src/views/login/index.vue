@@ -1,74 +1,37 @@
 <template>
   <div class="login-container">
-    <el-form
-      ref="loginFormRef"
-      :model="loginForm"
-      :rules="loginRules"
-      class="login-form"
-      auto-complete="on"
-      label-position="left"
-    >
+    <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on"
+      label-position="left">
       <div class="title-container">
         <h3 class="title">{{ $t('login.title') }}</h3>
-        <lang-select class="set-language" />
+        <!-- <lang-select class="set-language" /> -->
       </div>
 
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input
-          ref="username"
-          v-model="loginForm.username"
-          :placeholder="$t('login.username')"
-          name="username"
-          type="text"
-          tabindex="1"
-          auto-complete="on"
-        />
+        <el-input ref="username" v-model="loginForm.username" :placeholder="$t('login.username')" name="username"
+          type="text" tabindex="1" auto-complete="on" />
       </el-form-item>
 
-      <el-tooltip
-        :disabled="capslockTooltipDisabled"
-        content="大写锁定打开"
-        placement="right"
-      >
+      <el-tooltip :disabled="capslockTooltipDisabled" content="大写锁定打开" placement="right">
         <el-form-item prop="password">
           <span class="svg-container">
             <svg-icon icon-class="password" />
           </span>
-          <el-input
-            ref="passwordRef"
-            :key="passwordType"
-            v-model="loginForm.password"
-            :type="passwordType"
-            :placeholder="$t('login.password')"
-            name="password"
-            tabindex="2"
-            auto-complete="on"
-            @keyup="checkCapslock"
-            @blur="capslockTooltipDisabled = true"
-            @keyup.enter="handleLogin"
-          />
+          <el-input ref="passwordRef" :key="passwordType" v-model="loginForm.password" :type="passwordType"
+            :placeholder="$t('login.password')" name="password" tabindex="2" auto-complete="on" @keyup="checkCapslock"
+            @blur="capslockTooltipDisabled = true" @keyup.enter="handleLogin" />
           <span class="show-pwd" @click="showPwd">
-            <svg-icon
-              :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
-            />
+            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
           </span>
         </el-form-item>
       </el-tooltip>
 
-      <el-button
-        size="default"
-        :loading="loading"
-        type="primary"
-        style="width: 100%; margin-bottom: 30px"
-        @click.prevent="handleLogin"
-        >{{ $t('login.login') }}
+      <el-button size="default" :loading="loading" type="primary" style="width: 100%; margin-bottom: 30px"
+        @click.prevent="handleLogin">{{ $t('login.login') }}
       </el-button>
-      <router-link to="/home">
-        <p class="bullshit__return-home">回到首页</p>
-      </router-link>
       <!-- 账号密码提示 -->
       <!-- <div class="tips">
         <div style="position: relative">
@@ -80,10 +43,10 @@
       </div> -->
     </el-form>
 
-    <div v-if="showCopyright == true" class="copyright">
+    <!-- <div v-if="showCopyright == true" class="copyright">
       <p>{{ $t('login.copyright') }}</p>
       <p>{{ $t('login.icp') }}</p>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -182,7 +145,7 @@ function handleLogin() {
       user
         .login(state.loginForm)
         .then(() => {
-          router.push('/home');
+          router.go(0)
           state.loading = false;
         })
         .catch(() => {
@@ -230,7 +193,7 @@ onMounted(() => {
 
 <style lang="scss">
 $bg: #283443;
-$light_gray: #fff;
+$light_gray: rgb(7, 6, 6);
 $cursor: #fff;
 
 /* reset element-ui css */
@@ -260,10 +223,13 @@ $cursor: #fff;
     display: inline-block;
     height: 36px;
     width: 85%;
+
     .el-input__wrapper {
+      width: 100%;
       padding: 0;
       background: transparent;
       box-shadow: none;
+
       .el-input__inner {
         background: transparent;
         border: 0px;
@@ -273,10 +239,6 @@ $cursor: #fff;
         height: 36px;
         caret-color: $cursor;
 
-        &:-webkit-autofill {
-          box-shadow: 0 0 0px 1000px $bg inset !important;
-          -webkit-text-fill-color: $cursor !important;
-        }
       }
     }
   }
@@ -309,9 +271,9 @@ $cursor: #fff;
 </style>
 
 <style lang="scss" scoped>
-$bg: #2d3a4b;
+$bg: #ffffff;
 $dark_gray: #889aa4;
-$light_gray: #eee;
+$light_gray: rgb(0, 0, 0);
 
 .login-container {
   min-height: 100%;
@@ -323,7 +285,7 @@ $light_gray: #eee;
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
+    padding: 20px 35px 0;
     margin: 0 auto;
     overflow: hidden;
   }
