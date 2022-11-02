@@ -1,7 +1,13 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on"
-      label-position="left">
+    <el-form
+      ref="loginFormRef"
+      :model="loginForm"
+      :rules="loginRules"
+      class="login-form"
+      auto-complete="on"
+      label-position="left"
+    >
       <div class="title-container">
         <h3 class="title">{{ $t('login.title') }}</h3>
         <!-- <lang-select class="set-language" /> -->
@@ -11,26 +17,54 @@
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input ref="username" v-model="loginForm.username" :placeholder="$t('login.username')" name="username"
-          type="text" tabindex="1" auto-complete="on" />
+        <el-input
+          ref="username"
+          v-model="loginForm.username"
+          :placeholder="$t('login.username')"
+          name="username"
+          type="text"
+          tabindex="1"
+          auto-complete="on"
+        />
       </el-form-item>
 
-      <el-tooltip :disabled="capslockTooltipDisabled" content="大写锁定打开" placement="right">
+      <el-tooltip
+        :disabled="capslockTooltipDisabled"
+        content="大写锁定打开"
+        placement="right"
+      >
         <el-form-item prop="password">
           <span class="svg-container">
             <svg-icon icon-class="password" />
           </span>
-          <el-input ref="passwordRef" :key="passwordType" v-model="loginForm.password" :type="passwordType"
-            :placeholder="$t('login.password')" name="password" tabindex="2" auto-complete="on" @keyup="checkCapslock"
-            @blur="capslockTooltipDisabled = true" @keyup.enter="handleLogin" />
+          <el-input
+            ref="passwordRef"
+            :key="passwordType"
+            v-model="loginForm.password"
+            :type="passwordType"
+            :placeholder="$t('login.password')"
+            name="password"
+            tabindex="2"
+            auto-complete="on"
+            @keyup="checkCapslock"
+            @blur="capslockTooltipDisabled = true"
+            @keyup.enter="handleLogin"
+          />
           <span class="show-pwd" @click="showPwd">
-            <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+            <svg-icon
+              :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
+            />
           </span>
         </el-form-item>
       </el-tooltip>
 
-      <el-button size="default" :loading="loading" type="primary" style="width: 100%; margin-bottom: 30px"
-        @click.prevent="handleLogin">{{ $t('login.login') }}
+      <el-button
+        size="default"
+        :loading="loading"
+        type="primary"
+        style="width: 100%; margin-bottom: 30px"
+        @click.prevent="handleLogin"
+        >{{ $t('login.login') }}
       </el-button>
       <!-- 账号密码提示 -->
       <!-- <div class="tips">
@@ -117,8 +151,8 @@ const {
 
 function checkCapslock(e: any) {
   const { key } = e;
-  state.capslockTooltipDisabled =
-    key && key.length === 1 && key >= 'A' && key <= 'Z';
+  // state.capslockTooltipDisabled =
+  //   key && key.length === 1 && key >= 'A' && key <= 'Z';
 }
 
 function showPwd() {

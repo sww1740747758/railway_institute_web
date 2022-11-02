@@ -1,9 +1,21 @@
 <template>
   <el-main>
-    <el-form v-if="type == '1'" ref="ruleFormRef2" :model="ruleForm" :rules="rules" label-width="120px"
-      class="demo-ruleForm" :size="formSize" status-icon>
+    <el-form
+      v-if="type == '1'"
+      ref="ruleFormRef2"
+      :model="ruleForm"
+      :rules="rules"
+      label-width="120px"
+      class="demo-ruleForm"
+      :size="formSize"
+      status-icon
+    >
       <el-form-item label="生日" prop="birthday">
-        <el-date-picker v-model="ruleForm.birthday" type="date" placeholder="请选择生日" />
+        <el-date-picker
+          v-model="ruleForm.birthday"
+          type="date"
+          placeholder="请选择生日"
+        />
       </el-form-item>
       <el-form-item label="民族" prop="nation">
         <el-input v-model="ruleForm.nation" />
@@ -23,12 +35,26 @@
       <el-form-item label="身份证号码" prop="idCard">
         <el-input placeholder="请填写身份证号码" v-model="ruleForm.idCard" />
       </el-form-item>
-
     </el-form>
-    <el-form v-if="type == '2'" ref="ruleFormRef2" :model="ruleForm" :rules="rules" label-width="120px"
-      class="demo-ruleForm" :size="formSize" status-icon>
+    <el-form
+      v-if="type == '2'"
+      ref="ruleFormRef2"
+      :model="ruleForm"
+      :rules="rules"
+      label-width="120px"
+      class="demo-ruleForm"
+      :size="formSize"
+      status-icon
+    >
       <el-form-item label="单位会员类型" prop="unitMembershipType">
-        <el-input v-model="ruleForm.unitMembershipType" />
+        <el-tree-select
+          v-model="ruleForm.unitMembershipType"
+          placeholder="请选择单位会员类型"
+          :data="dataOption.peruserTypeOption"
+          filterable
+          check-strictly
+          :render-after-expand="false"
+        />
       </el-form-item>
       <el-form-item label="机构代码证号" prop="institutionCode">
         <el-input v-model="ruleForm.institutionCode" />
@@ -43,7 +69,11 @@
         <el-input v-model="ruleForm.competentDepartment" />
       </el-form-item>
       <el-form-item label="成立时间" prop="establishedTime">
-        <el-date-picker v-model="ruleForm.establishedTime" type="date" placeholder="成立时间" />
+        <el-date-picker
+          v-model="ruleForm.establishedTime"
+          type="date"
+          placeholder="成立时间"
+        />
       </el-form-item>
       <el-form-item label="注册资金" prop="registeredCapital">
         <el-input-number v-model="ruleForm.registeredCapital" />万
@@ -64,8 +94,16 @@
         <el-input v-model="ruleForm.linkmanPhone" />
       </el-form-item>
     </el-form>
-    <el-form v-if="type == '3'" ref="ruleFormRef2" :model="ruleForm" :rules="rules" label-width="120px"
-      class="demo-ruleForm" :size="formSize" status-icon>
+    <el-form
+      v-if="type == '3'"
+      ref="ruleFormRef2"
+      :model="ruleForm"
+      :rules="rules"
+      label-width="120px"
+      class="demo-ruleForm"
+      :size="formSize"
+      status-icon
+    >
       <el-form-item label="学历" prop="education">
         <el-input v-model="ruleForm.education" />
       </el-form-item>
@@ -82,18 +120,61 @@
         <el-input v-model="ruleForm.mainAchievement" />
       </el-form-item>
       <el-form-item label="专业领域1" prop="areaOne">
-        <el-input v-model="ruleForm.areaOne" />
+        <el-tree-select
+          v-model="ruleForm.areaOne"
+          placeholder="请选择专业领域"
+          :data="dataOption.riExpertExpertiseOptions"
+          filterable
+          check-strictly
+          :render-after-expand="false"
+        />
       </el-form-item>
       <el-form-item label="专业领域1" prop="areaTwo">
-        <el-input v-model="ruleForm.areaTwo" />
+        <el-tree-select
+          v-model="ruleForm.areaTwo"
+          placeholder="请选择专业领域"
+          :data="dataOption.riExpertExpertiseOptions"
+          filterable
+          check-strictly
+          :render-after-expand="false"
+        />
       </el-form-item>
     </el-form>
   </el-main>
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref, toRefs } from 'vue';
+import { reactive, ref, toRefs, onMounted, getCurrentInstance } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
+import { Option } from '@/types/common';
+const { proxy }: any = getCurrentInstance();
+onMounted(() => {
+  getGenderOptions();
+  getriExpertExpertiseOptions();
+});
+
+const dataOption = reactive({
+  // 单位会员类型下拉项
+  peruserTypeOption: [] as Option[],
+  riExpertExpertiseOptions: [] as Option[]
+});
+
+//初始化单位会员类型
+function getGenderOptions() {
+  proxy.$listDictItemsByTypeCode('RI_PERUSER_TYPE').then((response: any) => {
+    dataOption.peruserTypeOption = response?.data;
+  });
+}
+
+//初始化专业领域
+function getriExpertExpertiseOptions() {
+  proxy
+    .$listDictItemsByTypeCode('RI_EXPERT_EXPERTISE')
+    .then((response: any) => {
+      dataOption.riExpertExpertiseOptions = response?.data;
+    });
+}
+
 const props = defineProps({
   //子组件接收父组件传递过来的值
   type: String
@@ -102,7 +183,6 @@ const { type } = toRefs(props);
 const formSize = ref('default');
 const ruleFormRef2 = ref<FormInstance>();
 const ruleForm = reactive({
-
   //个人会员
   birthday: '',
   nation: '',
@@ -112,36 +192,34 @@ const ruleForm = reactive({
   politicsStatus: '',
   idCard: '',
 
-
   //单位会员
-  unitMembershipType: "",
-  institutionCode: "",
-  websiteAddress: "",
-  natureOfUnit: "",
-  competentDepartment: "",
-  establishedTime: "",
+  unitMembershipType: '',
+  institutionCode: '',
+  websiteAddress: '',
+  natureOfUnit: '',
+  competentDepartment: '',
+  establishedTime: '',
   registeredCapital: 0,
-  representative: "",
-  representativePhone: "",
-  linkman: "",
-  linkmanRank: "",
-  linkmanPhone: "",
+  representative: '',
+  representativePhone: '',
+  linkman: '',
+  linkmanRank: '',
+  linkmanPhone: '',
 
   //专家
-  education: "",
-  degree: "",
-  graduateSchool: "",
-  collageGraduate: "",
-  mainAchievement: "",
-  areaOne: "",
-  areaTwo: ""
+  education: '',
+  degree: '',
+  graduateSchool: '',
+  collageGraduate: '',
+  mainAchievement: '',
+  areaOne: '',
+  areaTwo: ''
 });
-
 
 // 固话正则校验
 const tel = (rule: any, value: any, callback: any) => {
-  const tel = /^(0[0-9]{2,3}\-)([2-9][0-9]{4,7})+(\-[0-9]{1,4})?$/
-  if (value == "" || tel.test(value)) {
+  const tel = /^(0[0-9]{2,3}\-)([2-9][0-9]{4,7})+(\-[0-9]{1,4})?$/;
+  if (value == '' || tel.test(value)) {
     // 合法邮箱
     return callback();
   }
@@ -149,13 +227,13 @@ const tel = (rule: any, value: any, callback: any) => {
 };
 // 身份证正则校验
 const idCard = (rule: any, value: any, callback: any) => {
-  var idCard = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+  var idCard =
+    /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
   if (idCard.test(value)) {
     return callback();
   }
   callback(new Error('请输入合法身份证号码'));
 };
-
 
 const rules = reactive<FormRules>({
   phone: [
@@ -170,6 +248,27 @@ const rules = reactive<FormRules>({
       validator: idCard,
       trigger: 'blur'
     }
+  ],
+  unitMembershipType: [
+    {
+      required: true,
+      message: '请选择单位会员类型',
+      trigger: 'blur'
+    }
+  ],
+  areaOne: [
+    {
+      required: true,
+      message: '请选择当前专家领域',
+      trigger: 'blur'
+    }
+  ],
+  areaTwo: [
+    {
+      required: true,
+      message: '请选择当前专家领域',
+      trigger: 'blur'
+    }
   ]
 });
 
@@ -180,13 +279,12 @@ const validate = () => {
       resolve(valid);
     });
   });
-}
+};
 
 defineExpose({
-  validate, ruleForm
+  validate,
+  ruleForm
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

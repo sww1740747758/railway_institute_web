@@ -1,7 +1,15 @@
 <template>
   <el-main>
-    <el-form v-if="type == '1'" ref="ruleFormRef3" :model="ruleForm" :rules="rules" label-width="120px"
-      class="demo-ruleForm" :size="formSize" status-icon>
+    <el-form
+      v-if="type == '1'"
+      ref="ruleFormRef3"
+      :model="ruleForm"
+      :rules="rules"
+      label-width="120px"
+      class="demo-ruleForm"
+      :size="formSize"
+      status-icon
+    >
       <el-form-item label="职称" prop="rank">
         <el-input v-model="ruleForm.rank" />
       </el-form-item>
@@ -30,8 +38,16 @@
         <el-input v-model="ruleForm.postcode" />
       </el-form-item>
     </el-form>
-    <el-form v-if="type == '2'" ref="ruleFormRef3" :model="ruleForm" :rules="rules" label-width="220px"
-      class="demo-ruleForm" :size="formSize" status-icon>
+    <el-form
+      v-if="type == '2'"
+      ref="ruleFormRef3"
+      :model="ruleForm"
+      :rules="rules"
+      label-width="220px"
+      class="demo-ruleForm"
+      :size="formSize"
+      status-icon
+    >
       <el-form-item label="企业职工总人数" prop="headcount">
         <el-input-number v-model="ruleForm.headcount" />
       </el-form-item>
@@ -44,10 +60,19 @@
       <el-form-item label="中级职称数" prop="intermediateCertificate">
         <el-input-number v-model="ruleForm.intermediateCertificate" />
       </el-form-item>
-      <el-form-item label="主要铁道技术成果和产品（科技工作简况）" prop="scienceAndTechnology_work">
-        <el-input v-model="ruleForm.scienceAndTechnology_work" type="textarea" />
+      <el-form-item
+        label="主要铁道技术成果和产品（科技工作简况）"
+        prop="scienceAndTechnology_work"
+      >
+        <el-input
+          v-model="ruleForm.scienceAndTechnology_work"
+          type="textarea"
+        />
       </el-form-item>
-      <el-form-item label="技术专利及产品获奖认证情况" prop="patentsAndCertification">
+      <el-form-item
+        label="技术专利及产品获奖认证情况"
+        prop="patentsAndCertification"
+      >
         <el-input v-model="ruleForm.patentsAndCertification" />
       </el-form-item>
       <el-form-item label="工作建议" prop="suggestion">
@@ -65,13 +90,29 @@
       <el-form-item label="职称" prop="rank">
         <el-input v-model="ruleForm.rank" />
       </el-form-item>
-
     </el-form>
-    <el-form v-if="type == '3'" ref="ruleFormRef3" :model="ruleForm" :rules="rules" label-width="120px"
-      class="demo-ruleForm" :size="formSize" status-icon>
+    <el-form
+      v-if="type == '3'"
+      ref="ruleFormRef3"
+      :model="ruleForm"
+      :rules="rules"
+      label-width="120px"
+      class="demo-ruleForm"
+      :size="formSize"
+      status-icon
+    >
       <el-form-item label="入库申请表" prop="applicationForm">
-        <el-upload class="upload-demo" action="" drag :auto-upload="false" :file-list="ruleForm.applicationForm"
-          :limit="1">
+        <el-upload
+          ref="upload"
+          class="upload-demo"
+          action=""
+          drag
+          :auto-upload="false"
+          :on-exceed="handleExceed"
+          :file-list="ruleForm.excelFilelist"
+          :limit="1"
+          :on-change="handleExcelChange"
+        >
           <el-icon class="el-icon--upload">
             <upload-filled />
           </el-icon>
@@ -101,9 +142,15 @@
 </template>
 
 <script lang="ts" setup>
+import { UploadFilled } from '@element-plus/icons-vue';
 import {
-  UploadFilled
-} from '@element-plus/icons-vue';
+  ElForm,
+  UploadFile,
+  UploadInstance,
+  genFileId,
+  UploadProps,
+  UploadRawFile
+} from 'element-plus';
 import { reactive, ref, toRefs } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
 const props = defineProps({
@@ -114,7 +161,6 @@ const { type } = toRefs(props);
 const formSize = ref('default');
 const ruleFormRef3 = ref<FormInstance>();
 const ruleForm = reactive({
-
   //个人会员
   graduateSchool: '',
   lastGraduationTime: '',
@@ -124,42 +170,52 @@ const ruleForm = reactive({
   mailingAddress: '',
   postcode: '',
   rank: '',
-  duty: "",
+  duty: '',
 
   //单位会员
   headcount: 0,
   managementAndTechnicalStaff: 0,
   advancedLevelAccountant: 0,
   intermediateCertificate: 0,
-  scienceAndTechnology_work: "",
-  patentsAndCertification: "",
-  suggestion: "",
+  scienceAndTechnology_work: '',
+  patentsAndCertification: '',
+  suggestion: '',
 
+  //文件集合
+  excelFilelist: [] as File[],
   //专家
-  applicationForm: [] as File[],
+  applicationForm: undefined as any,
   politicsStatus: '',
-  birthday: '',
-
+  birthday: ''
 });
-
-// 上传文件校验
-const fileMustUpload = (rule: any, value: any, callback: any) => {
-  console.log(ruleForm.applicationForm.length);
-
-  if (!ruleForm.applicationForm.length) {
-    // 未上传文件
-    callback("请上传申请表");
-  }
-  callback();
-};
 
 const rules = reactive<FormRules>({
-  applicationForm: [{
-    message: '请上传',
-    trigger: 'change',
-    required: true
-  },]
+  applicationForm: [
+    {
+      message: '请上传入库申请表',
+      trigger: 'change',
+      required: true
+    }
+  ]
 });
+
+const upload = ref<UploadInstance>();
+
+const handleExceed: UploadProps['onExceed'] = files => {
+  upload.value!.clearFiles();
+  const file = files[0] as UploadRawFile;
+  file.uid = genFileId();
+  upload.value!.handleStart(file);
+};
+
+/**
+ * Excel文件change事件
+ *
+ * @param file
+ */
+function handleExcelChange(file: UploadFile) {
+  ruleForm.applicationForm = file.raw;
+}
 
 const validate = () => {
   return new Promise(resolve => {
@@ -168,13 +224,12 @@ const validate = () => {
       resolve(valid);
     });
   });
-}
+};
 
 defineExpose({
-  validate, ruleForm
+  validate,
+  ruleForm
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
