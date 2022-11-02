@@ -1,14 +1,7 @@
 <template>
   <el-main>
-    <el-form
-      ref="ruleFormRef"
-      :model="ruleForm"
-      :rules="rules"
-      label-width="120px"
-      class="demo-ruleForm"
-      :size="formSize"
-      status-icon
-    >
+    <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="120px" class="demo-ruleForm"
+      :size="formSize" status-icon>
       <el-form-item label="用户名" prop="userName">
         <el-input v-model="ruleForm.userName" />
       </el-form-item>
@@ -17,8 +10,7 @@
       </el-form-item>
       <el-form-item label="性别" prop="gender">
         <el-radio-group v-model="ruleForm.gender">
-          <el-radio label="男" />
-          <el-radio label="女" />
+          <el-radio v-for="item in  dataOption.genderOptions" :label="item.value">{{ item.label }}</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="密码" prop="passWord">
@@ -28,10 +20,8 @@
         <el-input type="password" v-model="ruleForm.nextPassWord" />
       </el-form-item>
       <el-form-item label="单位" prop="deptId">
-        <el-select v-model="ruleForm.deptId">
-          <el-option label="北羊" value="1" />
-          <el-option label="总公室" value="2" />
-        </el-select>
+        <el-tree-select v-model="ruleForm.deptId" placeholder="请选择所属部门" :data="dataOption.deptOptions" filterable
+          check-strictly :render-after-expand="false" />
       </el-form-item>
       <el-form-item label="手机" prop="mobile">
         <el-input v-model="ruleForm.mobile" />
@@ -44,32 +34,54 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue';
+import { reactive, ref, onMounted, getCurrentInstance } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
-defineExpose({
-  validate() {
-    return new Promise(resolve => {
-      if (!ruleFormRef.value) return;
-      ruleFormRef.value.validate((valid: any) => {
-        resolve(valid);
-      });
-    });
-  }
-});
-
+import { listDeptOptions } from '@/api/dept';
+import { Option } from '@/types/common';
 const formSize = ref('default');
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive({
   userName: 'asd',
   nickName: 'sww',
-  gender: '男',
+  deptId: '',
+  gender: '',
   passWord: 'sww1740747758',
   nextPassWord: 'sww1740747758',
-  deptId: '1',
   mobile: '15571161621',
   email: '1740747758@qq.com'
 });
 
+const dataOption = reactive({
+  // 部门下拉项
+  deptOptions: [] as Option[],
+  // 性别下拉项
+  genderOptions: [] as Option[],
+})
+
+const { proxy }: any = getCurrentInstance();
+onMounted(() => {
+  // 初始化性别字典
+  getGenderOptions();
+  // 初始化部门
+  getDeptOptions();
+});
+/**
+ * 获取部门下拉项
+ */
+async function getDeptOptions() {
+  listDeptOptions().then(response => {
+    dataOption.deptOptions = response.data;
+  });
+}
+
+/**
+ * 获取性别下拉项
+ */
+function getGenderOptions() {
+  proxy.$listDictItemsByTypeCode('gender').then((response: any) => {
+    dataOption.genderOptions = response?.data;
+  });
+}
 const validatePass = (rule: any, value: any, callback: any) => {
   const reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,18}$/;
   if (value === '') {
@@ -97,7 +109,7 @@ const Mobile = (rule: any, value: any, callback: any) => {
     // 合法邮箱
     return callback();
   }
-  callback(new Error('请输入合法邮箱'));
+  callback(new Error('请输入合法手机号码'));
 };
 
 // 自定义邮箱规则
@@ -162,6 +174,21 @@ const rules = reactive<FormRules>({
     }
   ]
 });
+
+const validate = () => {
+  return new Promise(resolve => {
+    if (!ruleFormRef.value) return;
+    ruleFormRef.value.validate((valid: any) => {
+      resolve(valid);
+    });
+  });
+}
+
+defineExpose({
+  validate, ruleForm
+});
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

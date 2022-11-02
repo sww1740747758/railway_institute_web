@@ -1,253 +1,180 @@
+<template>
+  <el-main>
+    <el-form v-if="type == '1'" ref="ruleFormRef3" :model="ruleForm" :rules="rules" label-width="120px"
+      class="demo-ruleForm" :size="formSize" status-icon>
+      <el-form-item label="职称" prop="rank">
+        <el-input v-model="ruleForm.rank" />
+      </el-form-item>
+      <el-form-item label="职务" prop="duty">
+        <el-input v-model="ruleForm.duty" />
+      </el-form-item>
+      <el-form-item label="最后毕业时间" prop="graduateSchool">
+        <el-input v-model="ruleForm.graduateSchool" />
+      </el-form-item>
+      <el-form-item label="最后毕业时间" prop="lastGraduationTime">
+        <el-date-picker v-model="ruleForm.lastGraduationTime" type="date" />
+      </el-form-item>
+      <el-form-item label="毕业专业" prop="collageGraduate">
+        <el-input v-model="ruleForm.collageGraduate" />
+      </el-form-item>
+      <el-form-item label="学位" prop="degree">
+        <el-input v-model="ruleForm.degree" />
+      </el-form-item>
+      <el-form-item label="持何等资质证书" prop="qualificationCertificate">
+        <el-input v-model="ruleForm.qualificationCertificate" />
+      </el-form-item>
+      <el-form-item label="通讯地址" prop="mailingAddress">
+        <el-input v-model="ruleForm.mailingAddress" />
+      </el-form-item>
+      <el-form-item label="邮编" prop="postcode">
+        <el-input v-model="ruleForm.postcode" />
+      </el-form-item>
+    </el-form>
+    <el-form v-if="type == '2'" ref="ruleFormRef3" :model="ruleForm" :rules="rules" label-width="220px"
+      class="demo-ruleForm" :size="formSize" status-icon>
+      <el-form-item label="企业职工总人数" prop="headcount">
+        <el-input-number v-model="ruleForm.headcount" />
+      </el-form-item>
+      <el-form-item label="管理和技术人员数" prop="managementAndTechnicalStaff">
+        <el-input-number v-model="ruleForm.managementAndTechnicalStaff" />
+      </el-form-item>
+      <el-form-item label="高级职称数" prop="advancedLevelAccountant">
+        <el-input-number v-model="ruleForm.advancedLevelAccountant" />
+      </el-form-item>
+      <el-form-item label="中级职称数" prop="intermediateCertificate">
+        <el-input-number v-model="ruleForm.intermediateCertificate" />
+      </el-form-item>
+      <el-form-item label="主要铁道技术成果和产品（科技工作简况）" prop="scienceAndTechnology_work">
+        <el-input v-model="ruleForm.scienceAndTechnology_work" type="textarea" />
+      </el-form-item>
+      <el-form-item label="技术专利及产品获奖认证情况" prop="patentsAndCertification">
+        <el-input v-model="ruleForm.patentsAndCertification" />
+      </el-form-item>
+      <el-form-item label="工作建议" prop="suggestion">
+        <el-input v-model="ruleForm.suggestion" type="textarea" />
+      </el-form-item>
+      <el-form-item label="通讯地址" prop="mailingAddress">
+        <el-input v-model="ruleForm.mailingAddress" />
+      </el-form-item>
+      <el-form-item label="邮编" prop="postcode">
+        <el-input v-model="ruleForm.postcode" />
+      </el-form-item>
+      <el-form-item label="职务" prop="duty">
+        <el-input v-model="ruleForm.duty" />
+      </el-form-item>
+      <el-form-item label="职称" prop="rank">
+        <el-input v-model="ruleForm.rank" />
+      </el-form-item>
+
+    </el-form>
+    <el-form v-if="type == '3'" ref="ruleFormRef3" :model="ruleForm" :rules="rules" label-width="120px"
+      class="demo-ruleForm" :size="formSize" status-icon>
+      <el-form-item label="入库申请表" prop="applicationForm">
+        <el-upload class="upload-demo" action="" drag :auto-upload="false" :file-list="ruleForm.applicationForm"
+          :limit="1">
+          <el-icon class="el-icon--upload">
+            <upload-filled />
+          </el-icon>
+          <div class="el-upload__text">
+            将文件拖到此处，或
+            <em>点击上传</em>
+          </div>
+          <template #tip>
+            <div class="el-upload__tip">word/excel/pdf files</div>
+          </template>
+        </el-upload>
+      </el-form-item>
+      <el-form-item label="政治面貌" prop="politicsStatus">
+        <el-input v-model="ruleForm.politicsStatus" />
+      </el-form-item>
+      <el-form-item label="出生年月" prop="birthday">
+        <el-date-picker v-model="ruleForm.birthday" type="date" />
+      </el-form-item>
+      <el-form-item label="职务" prop="duty">
+        <el-input v-model="ruleForm.duty" />
+      </el-form-item>
+      <el-form-item label="职称" prop="rank">
+        <el-input v-model="ruleForm.rank" />
+      </el-form-item>
+    </el-form>
+  </el-main>
+</template>
+
 <script lang="ts" setup>
-import { toRefs, reactive, ref } from 'vue';
+import {
+  UploadFilled
+} from '@element-plus/icons-vue';
+import { reactive, ref, toRefs } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus';
 const props = defineProps({
   //子组件接收父组件传递过来的值
   type: String
 });
 const { type } = toRefs(props);
-
 const formSize = ref('default');
-const ruleFormRef = ref<FormInstance>();
+const ruleFormRef3 = ref<FormInstance>();
 const ruleForm = reactive({
-  userName: '',
-  nickName: '',
-  gender: '',
-  passWord: '',
-  nextPassWord: '',
-  deptId: '',
-  mobile: '',
-  email: ''
+
+  //个人会员
+  graduateSchool: '',
+  lastGraduationTime: '',
+  collageGraduate: '',
+  degree: '',
+  qualificationCertificate: '',
+  mailingAddress: '',
+  postcode: '',
+  rank: '',
+  duty: "",
+
+  //单位会员
+  headcount: 0,
+  managementAndTechnicalStaff: 0,
+  advancedLevelAccountant: 0,
+  intermediateCertificate: 0,
+  scienceAndTechnology_work: "",
+  patentsAndCertification: "",
+  suggestion: "",
+
+  //专家
+  applicationForm: [] as File[],
+  politicsStatus: '',
+  birthday: '',
+
 });
 
-const validatePass = (rule: any, value: any, callback: any) => {
-  const reg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,18}$/;
-  if (value === '') {
-    callback(new Error('请输入密码'));
-  } else if (!reg.test(value)) {
-    callback(new Error('用户名必须是由8-18位英文(含大小写)+数字组成'));
-  } else {
-    if (ruleForm.passWord !== '') {
-      if (!ruleFormRef.value) return;
-      ruleFormRef.value.validateField('checkPass', () => null);
-    }
-    callback();
-  }
-};
-const validatePass2 = (rule: any, value: any, callback: any) => {
-  if (value === '') {
-    callback(new Error('请再次输入密码'));
-  } else if (value !== ruleForm.nextPassWord) {
-    callback(new Error('两次密码不一样!'));
-  } else {
-    callback();
-  }
-};
+// 上传文件校验
+const fileMustUpload = (rule: any, value: any, callback: any) => {
+  console.log(ruleForm.applicationForm.length);
 
-// 手机号正则校验
-const Mobile = (rule: any, value: any, callback: any) => {
-  const regMobile = /^((\(\d{2,3}\))|(\d{3}\-))?1[3|5|8]\d{9}$/;
-  if (!value) {
-    return callback(new Error('请输入手机号码！'));
+  if (!ruleForm.applicationForm.length) {
+    // 未上传文件
+    callback("请上传申请表");
   }
-  if (!regMobile.test(value)) {
-    callback(new Error('请输入正确的手机号码！'));
-  }
-};
-
-// 自定义邮箱规则
-var checkEmail = (rule: any, value: any, callback: any) => {
-  const regEmail = /^\w+@\w+(\.\w+)+$/;
-  if (regEmail.test(value)) {
-    // 合法邮箱
-    return callback();
-  }
-  callback(new Error('请输入合法邮箱'));
+  callback();
 };
 
 const rules = reactive<FormRules>({
-  userName: [
-    { required: true, message: '用户名必须填写', trigger: 'blur' },
-    { min: 3, max: 64, message: '字数不能必须为3-60之间', trigger: 'blur' }
-  ],
-  nickName: [
-    { required: true, message: '姓名必须填写', trigger: 'blur' },
-    { min: 3, max: 64, message: '字数不能必须为3-60之间', trigger: 'blur' }
-  ],
-  gender: [
-    {
-      required: true,
-      message: '选一个性别吧',
-      trigger: 'change'
-    }
-  ],
-  passWord: [
-    {
-      required: true,
-      validator: validatePass,
-      trigger: 'blur'
-    }
-  ],
-  nextPassWord: [
-    {
-      required: true,
-      validator: validatePass2,
-      trigger: 'blur'
-    }
-  ],
-  deptId: [
-    {
-      required: true,
-      message: '选一个单位吧',
-      trigger: 'change'
-    }
-  ],
-  mobile: [
-    {
-      required: true,
-      validator: Mobile,
-      trigger: 'change'
-    }
-  ],
-  email: [
-    {
-      required: true,
-      validator: checkEmail,
-      trigger: 'change'
-    }
-  ]
+  applicationForm: [{
+    message: '请上传',
+    trigger: 'change',
+    required: true
+  },]
+});
+
+const validate = () => {
+  return new Promise(resolve => {
+    if (!ruleFormRef3.value) return;
+    ruleFormRef3.value.validate((valid: any) => {
+      resolve(valid);
+    });
+  });
+}
+
+defineExpose({
+  validate, ruleForm
 });
 </script>
 
-<template>
-  <el-main>
-    <div v-if="type == '1'">
-      <el-form
-        ref="ruleFormRef"
-        :model="ruleForm"
-        :rules="rules"
-        label-width="120px"
-        class="demo-ruleForm"
-        :size="formSize"
-        status-icon
-      >
-        <el-form-item label="用户名" prop="userName">
-          <el-input v-model="ruleForm.userName" />
-        </el-form-item>
-        <el-form-item label="姓名" prop="nickName">
-          <el-input v-model="ruleForm.nickName" />
-        </el-form-item>
-        <el-form-item label="性别" prop="gender">
-          <el-radio-group v-model="ruleForm.gender">
-            <el-radio label="男" />
-            <el-radio label="女" />
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="密码" prop="passWord">
-          <el-input v-model="ruleForm.passWord" />
-        </el-form-item>
-        <el-form-item label="重复密码" prop="nextPassWord">
-          <el-input v-model="ruleForm.nextPassWord" />
-        </el-form-item>
-        <el-form-item label="单位" prop="deptId">
-          <el-select v-model="ruleForm.deptId">
-            <el-option label="北羊" value="1" />
-            <el-option label="总公室" value="2" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="手机" prop="mobile">
-          <el-input v-model="ruleForm.mobile" />
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="ruleForm.email" />
-        </el-form-item>
-      </el-form>
-    </div>
-    <div v-if="type == '2'">
-      <el-form
-        ref="ruleFormRef"
-        :model="ruleForm"
-        :rules="rules"
-        label-width="120px"
-        class="demo-ruleForm"
-        :size="formSize"
-        status-icon
-      >
-        <el-form-item label="用户名" prop="userName">
-          <el-input v-model="ruleForm.userName" />
-        </el-form-item>
-        <el-form-item label="姓名" prop="nickName">
-          <el-input v-model="ruleForm.nickName" />
-        </el-form-item>
-        <el-form-item label="性别" prop="gender">
-          <el-radio-group v-model="ruleForm.gender">
-            <el-radio label="男" />
-            <el-radio label="女" />
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="密码" prop="passWord">
-          <el-input v-model="ruleForm.passWord" />
-        </el-form-item>
-        <el-form-item label="重复密码" prop="nextPassWord">
-          <el-input v-model="ruleForm.nextPassWord" />
-        </el-form-item>
-        <el-form-item label="单位" prop="deptId">
-          <el-select v-model="ruleForm.deptId">
-            <el-option label="北羊" value="1" />
-            <el-option label="总公室" value="2" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="手机" prop="mobile">
-          <el-input v-model="ruleForm.mobile" />
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="ruleForm.email" />
-        </el-form-item>
-      </el-form>
-    </div>
-    <div v-if="type == '3'">
-      <el-form
-        ref="ruleFormRef"
-        :model="ruleForm"
-        :rules="rules"
-        label-width="120px"
-        class="demo-ruleForm"
-        :size="formSize"
-        status-icon
-      >
-        <el-form-item label="用户名" prop="userName">
-          <el-input v-model="ruleForm.userName" />
-        </el-form-item>
-        <el-form-item label="姓名" prop="nickName">
-          <el-input v-model="ruleForm.nickName" />
-        </el-form-item>
-        <el-form-item label="性别" prop="gender">
-          <el-radio-group v-model="ruleForm.gender">
-            <el-radio label="男" />
-            <el-radio label="女" />
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="密码" prop="passWord">
-          <el-input v-model="ruleForm.passWord" />
-        </el-form-item>
-        <el-form-item label="重复密码" prop="nextPassWord">
-          <el-input v-model="ruleForm.nextPassWord" />
-        </el-form-item>
-        <el-form-item label="单位" prop="deptId">
-          <el-select v-model="ruleForm.deptId">
-            <el-option label="北羊" value="1" />
-            <el-option label="总公室" value="2" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="手机" prop="mobile">
-          <el-input v-model="ruleForm.mobile" />
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="ruleForm.email" />
-        </el-form-item>
-      </el-form>
-    </div>
-  </el-main>
-</template>
+<style scoped>
 
-<style lang="scss" scoped></style>
+</style>

@@ -55,7 +55,7 @@ const handleClose = (done) => {
   <el-dialog v-model="dialogVisible" width="30%">
     <login />
   </el-dialog>
-  <el-dialog v-model="dialogRegister" :before-close="handleClose" width="60%">
+  <el-dialog v-model="dialogRegister" :before-close="handleClose" top="20px" width="70%">
     <registerVue />
   </el-dialog>
   <div style="width: 100%; height: 100px; font-size: 0; background: #fff">
