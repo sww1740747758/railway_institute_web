@@ -2,11 +2,11 @@
   <el-main>
     <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" label-width="120px" class="demo-ruleForm"
       :size="formSize" status-icon>
-      <el-form-item label="用户名" prop="userName">
-        <el-input v-model="ruleForm.userName" />
+      <el-form-item label="用户名" prop="username">
+        <el-input v-model="ruleForm.username" />
       </el-form-item>
-      <el-form-item label="姓名" prop="nickName">
-        <el-input v-model="ruleForm.nickName" />
+      <el-form-item label="姓名" prop="nickname">
+        <el-input v-model="ruleForm.nickname" />
       </el-form-item>
       <el-form-item label="性别" prop="gender">
         <el-radio-group v-model="ruleForm.gender">
@@ -41,8 +41,8 @@ import { Option } from '@/types/common';
 const formSize = ref('default');
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive({
-  userName: 'asd',
-  nickName: 'sww',
+  username: 'asd',
+  nickname: 'sww',
   deptId: '',
   gender: '',
   passWord: 'sww1740747758',

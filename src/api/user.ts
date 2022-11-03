@@ -158,3 +158,26 @@ export function importUser(deptId: number, roleIds: string, file: File) {
     }
   });
 }
+
+
+/**
+ * 成为会员
+ *
+ * @param data
+ */
+ export function registerMember(data: any,type:String) {
+  let url ='/api/v1/users'
+  if(type =='1'){
+    url ='/RiUser'
+  }else if(type =='2'){
+    url ='/RiPeruser'
+  }else if(type=='3'){
+    url ='/RiExpertUser'
+  }
+  
+  return request({
+    url: url,
+    method: 'post',
+    data: data
+  });
+}

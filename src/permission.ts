@@ -20,11 +20,12 @@ router.beforeEach(async (to, from, next) => {
   const { user, permission } = useStore();
   const hasToken = user.token;
   if (hasToken) {
+    
     if (loginWhiteList.indexOf(to.path) !== -1) {
       next();
     }
     // 登录成功，跳转到首页
-    if (to.path === '/login') {
+    else if (to.path === '/login') {
       next({ path: '/' });
       NProgress.done();
     } else {

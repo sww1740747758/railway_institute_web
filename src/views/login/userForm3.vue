@@ -1,22 +1,14 @@
 <template>
   <el-main>
-    <el-form
-      v-if="type == '1'"
-      ref="ruleFormRef3"
-      :model="ruleForm"
-      :rules="rules"
-      label-width="120px"
-      class="demo-ruleForm"
-      :size="formSize"
-      status-icon
-    >
+    <el-form v-if="type == '1'" ref="ruleFormRef3" :model="ruleForm" :rules="rules" label-width="120px"
+      class="demo-ruleForm" :size="formSize" status-icon>
       <el-form-item label="职称" prop="rank">
         <el-input v-model="ruleForm.rank" />
       </el-form-item>
       <el-form-item label="职务" prop="duty">
         <el-input v-model="ruleForm.duty" />
       </el-form-item>
-      <el-form-item label="最后毕业时间" prop="graduateSchool">
+      <el-form-item label="最后毕业学校" prop="graduateSchool">
         <el-input v-model="ruleForm.graduateSchool" />
       </el-form-item>
       <el-form-item label="最后毕业时间" prop="lastGraduationTime">
@@ -38,16 +30,8 @@
         <el-input v-model="ruleForm.postcode" />
       </el-form-item>
     </el-form>
-    <el-form
-      v-if="type == '2'"
-      ref="ruleFormRef3"
-      :model="ruleForm"
-      :rules="rules"
-      label-width="220px"
-      class="demo-ruleForm"
-      :size="formSize"
-      status-icon
-    >
+    <el-form v-if="type == '2'" ref="ruleFormRef3" :model="ruleForm" :rules="rules" label-width="220px"
+      class="demo-ruleForm" :size="formSize" status-icon>
       <el-form-item label="企业职工总人数" prop="headcount">
         <el-input-number v-model="ruleForm.headcount" />
       </el-form-item>
@@ -60,19 +44,10 @@
       <el-form-item label="中级职称数" prop="intermediateCertificate">
         <el-input-number v-model="ruleForm.intermediateCertificate" />
       </el-form-item>
-      <el-form-item
-        label="主要铁道技术成果和产品（科技工作简况）"
-        prop="scienceAndTechnology_work"
-      >
-        <el-input
-          v-model="ruleForm.scienceAndTechnology_work"
-          type="textarea"
-        />
+      <el-form-item label="主要铁道技术成果和产品（科技工作简况）" prop="scienceAndTechnology_work">
+        <el-input v-model="ruleForm.scienceAndTechnology_work" type="textarea" />
       </el-form-item>
-      <el-form-item
-        label="技术专利及产品获奖认证情况"
-        prop="patentsAndCertification"
-      >
+      <el-form-item label="技术专利及产品获奖认证情况" prop="patentsAndCertification">
         <el-input v-model="ruleForm.patentsAndCertification" />
       </el-form-item>
       <el-form-item label="工作建议" prop="suggestion">
@@ -91,28 +66,11 @@
         <el-input v-model="ruleForm.rank" />
       </el-form-item>
     </el-form>
-    <el-form
-      v-if="type == '3'"
-      ref="ruleFormRef3"
-      :model="ruleForm"
-      :rules="rules"
-      label-width="120px"
-      class="demo-ruleForm"
-      :size="formSize"
-      status-icon
-    >
+    <el-form v-if="type == '3'" ref="ruleFormRef3" :model="ruleForm" :rules="rules" label-width="120px"
+      class="demo-ruleForm" :size="formSize" status-icon>
       <el-form-item label="入库申请表" prop="applicationForm">
-        <el-upload
-          ref="upload"
-          class="upload-demo"
-          action=""
-          drag
-          :auto-upload="false"
-          :on-exceed="handleExceed"
-          :file-list="ruleForm.excelFilelist"
-          :limit="1"
-          :on-change="handleExcelChange"
-        >
+        <el-upload ref="upload" class="upload-demo" action="" drag :auto-upload="false" :on-exceed="handleExceed"
+          :file-list="ruleForm.excelFilelist" :limit="1" :on-change="handleExcelChange">
           <el-icon class="el-icon--upload">
             <upload-filled />
           </el-icon>
@@ -232,4 +190,6 @@ defineExpose({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
